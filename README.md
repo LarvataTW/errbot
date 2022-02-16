@@ -1,0 +1,5 @@
+# Errbot
+
+- chatops
+- discord
+- python
