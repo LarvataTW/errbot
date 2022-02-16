@@ -128,7 +128,7 @@ BOT_LOG_FILE = BOT_DATA_DIR + "/err.log"
 # If you encounter any issues with Err, please set your log level to
 # logging.DEBUG and attach a log with your bug report to aid the developers
 # in debugging the issue.
-BOT_LOG_LEVEL = logging.INFO
+BOT_LOG_LEVEL = logging.WARN
 
 # Enable logging to sentry (find out more about sentry at www.getsentry.com).
 # You can also separate Flask exceptions by enabling it. This will give more information in sentry
