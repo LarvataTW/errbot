@@ -1,6 +1,6 @@
 FROM python:3.9-alpine as base
 FROM base as builder
-RUN apk --no-cache --update add build-base
+RUN apk --no-cache --update add build-base libffi-dev
 COPY requirements.txt /requirements.txt
 RUN pip install --user -r /requirements.txt
 
