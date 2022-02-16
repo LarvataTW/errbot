@@ -18,7 +18,7 @@
 
 import logging
 
-BOT_ROOT_DIR = "/opt/errbot"
+BOT_ROOT_DIR = "/app"
 
 ##########################################################################
 # Core Errbot configuration                                              #
