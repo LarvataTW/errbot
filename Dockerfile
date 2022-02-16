@@ -11,8 +11,8 @@ COPY --from=builder /root/.local /root/.local
 COPY . /app
 WORKDIR /app
 
-RUN mkdir -p backends && \
-    cd backends && \
+RUN mkdir -p data plugins backends
+RUN cd backends && \
     git clone https://github.com/gbin/err-backend-discord.git
 
 # update PATH environment variable
