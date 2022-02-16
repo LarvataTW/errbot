@@ -17,6 +17,7 @@
 ##########################################################################
 
 import logging
+import os
 
 BOT_ROOT_DIR = "/app"
 
@@ -163,7 +164,7 @@ BOT_IDENTITY = {
     # "password": "changeme",  # The corresponding password for this user
     # "server": ("host.domain.tld", 5222),  # server override
     ## Slack mode (comment the others above if using this mode)
-    "token": ''
+    "token": os.environ["DISCORD_TOKEN"]
     ## you can also include the proxy for the SlackClient connection
     # "proxies": {"http": "some-http-proxy", "https": "some-https-proxy"}
     ## Telegram mode (comment the others above if using this mode)
@@ -189,7 +190,7 @@ BOT_IDENTITY = {
 #
 # Unix-style glob patterns are supported, so "gbin@localhost"
 # would be considered an admin if setting "*@localhost".
-BOT_ADMINS = ("gbin@localhost",)
+BOT_ADMINS = (os.environ["ERRBOT_ADMINS"],)
 
 # Set of admins that wish to receive administrative bot notifications.
 # BOT_ADMINS_NOTIFICATIONS = ()
