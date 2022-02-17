@@ -1,0 +1,5 @@
+.git
+.gitlab
+.github
+
+*.pyc
