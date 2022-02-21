@@ -31,7 +31,7 @@ class Notes(BotPlugin):
             self.notes[key].append(content)
 
     @botcmd
-    def note_create(self, message, args):
+    def note_set(self, message, args):
         """Create a note"""
         key = args
         self.creating = key
@@ -40,8 +40,8 @@ class Notes(BotPlugin):
         yield "開始記錄 {} ：".format(key)
 
     @botcmd(template="content")
-    def note_read(self, message, args):
+    def note_get(self, message, args):
         """Read a note"""
         key = args
-        content = ''.join(self.notes[key])
+        content = "\n".join(self.notes[key])
         return { 'key': key, 'content': content }
