@@ -2,8 +2,8 @@ name: Build And Release Docker Images
 
 on:
   push:
-    branches:
-      - 'master'
+    tags:
+      - "v*.*.*"
 
 env:
   IMAGE_NAME: errbot
@@ -40,4 +40,4 @@ jobs:
           context: .
           platforms: linux/amd64
           tags: |
-            ghcr.io/${{ env.GITHUB_OWNER }}/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ env.GITHUB_OWNER }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
