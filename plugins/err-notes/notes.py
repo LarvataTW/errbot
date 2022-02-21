@@ -42,14 +42,11 @@ class Notes(BotPlugin):
         key = args
         username = message.frm
         channel = message.frm.room if message.is_group else message.frm
-        channel_str = '{}'.format(channel)
-
         self.creating = key
-        if key not in self.notes:
-            self.notes[key] = {}
-            self.notes[key]['author'] = username
-            self.notes[key]['channel'] = channel_str
-            self.notes[key]['content'] = []
+        self.notes[key] = {}
+        self.notes[key]['author'] = username
+        self.notes[key]['channel'] = '{}'.format(channel)
+        self.notes[key]['content'] = []
         yield "開始記錄 {} ：".format(key)
 
     @botcmd(template="content")
