@@ -61,7 +61,17 @@ BACKEND = 'Discord'
 
 # STORAGE = "Shelf"  # defaults to filestorage (python shelf).
 
-# BOT_EXTRA_STORAGE_PLUGINS_DIR = None  # extra search path to find custom storage plugins
+BOT_EXTRA_STORAGE_PLUGINS_DIR = BOT_DATA_DIR + "/storages"
+
+STORAGE = 'SQL'
+STORAGE_CONFIG = {
+    'data_url': 'mysql+pymysql://{}:{}@{}/{}?chartset=utf8mb4'.format(
+        os.environ(DB_USERNAME),
+        os.environ(DB_PASSWORD),
+        os.environ(DB_HOST),
+        os.environ(DB_NAME)
+    ),
+}
 
 # The location where all of Err's data should be stored. Make sure to set
 # this to a directory that is writable by the user running the bot.

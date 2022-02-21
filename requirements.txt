@@ -1,3 +1,6 @@
 errbot
 discord.py==1.7.3
 aslookup
+mysqlclient
+jsonpickle
+sqlalchemy
