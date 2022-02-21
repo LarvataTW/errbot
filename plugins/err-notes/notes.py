@@ -32,9 +32,9 @@ class Notes(BotPlugin):
             if self.notes[key]['author'] == username and self.notes[key]['channel'] == channel_str:
                 self.notes[key]['content'].append(content)
             else:
-                pass # 發言人與作者不同，發言不在同一頻道，則不添加內容到筆記
+                return # 發言人與作者不同，發言不在同一頻道，則不添加內容到筆記
         else:
-            pass # creating 為空表示目前沒有任何筆記在創建狀態，缺點是同一時間只能有一筆在創建
+            return # creating 為空表示目前沒有任何筆記在創建狀態，缺點是同一時間只能有一筆在創建
 
     @botcmd
     def note_set(self, message, args):
