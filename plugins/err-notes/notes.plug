@@ -1,0 +1,9 @@
+[Core]
+name = Notes
+module = notes
+
+[Documentation]
+description = Remember and respond notes by keywords.
+
+[Python]
+version = 3
