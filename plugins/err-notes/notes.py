@@ -8,7 +8,6 @@ class Notes(BotPlugin):
 
     def __init__(self, *args, **kwargs):
         self.creating = None
-        self.notes = dict()
         super().__init__(*args, **kwargs)
 
     # callback_message 函式不知道為何沒動作
@@ -29,8 +28,11 @@ class Notes(BotPlugin):
 
         if self.creating:
             key = self.creating
-            if self.notes[key]['author'] == username and self.notes[key]['channel'] == channel_str:
-                self.notes[key]['content'].append(content)
+            _d = {}
+            _d = self[key]
+            if _d['author'] == username and _d['channel'] == channel_str:
+                _d['content'].append(content)
+                self[key] = _d
             else:
                 return # 發言人與作者不同，發言不在同一頻道，則不添加內容到筆記
         else:
@@ -43,15 +45,17 @@ class Notes(BotPlugin):
         username = message.frm
         channel = message.frm.room if message.is_group else message.frm
         self.creating = key
-        self.notes[key] = {}
-        self.notes[key]['author'] = username
-        self.notes[key]['channel'] = '{}'.format(channel)
-        self.notes[key]['content'] = []
+        _d = {}
+        self[key] = _d
+        with self.mutable(key) as _d:
+            _d['author'] = username
+            _d['channel'] = '{}'.format(channel)
+            _d['content'] = []
         yield "開始記錄 {} ：".format(key)
 
     @botcmd(template="content")
     def note_get(self, message, args):
         """Read a note"""
         key = args
-        content = "\n".join(self.notes[key]['content'])
+        content = "\n".join(self[key]['content'])
         return { 'key': key, 'content': content }
