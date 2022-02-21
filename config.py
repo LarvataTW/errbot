@@ -64,7 +64,7 @@ BACKEND = 'Discord'
 BOT_EXTRA_STORAGE_PLUGINS_DIR = BOT_ROOT_DIR + "/storages"
 
 STORAGE = 'SQL'
-STORAGE_CONFIG = { 'data_url': os.environ["DATABASE_URL"] }
+STORAGE_CONFIG = {'data_url': os.environ["DATABASE_URI"]}
 
 # The location where all of Err's data should be stored. Make sure to set
 # this to a directory that is writable by the user running the bot.
