@@ -61,7 +61,7 @@ BACKEND = 'Discord'
 
 # STORAGE = "Shelf"  # defaults to filestorage (python shelf).
 
-BOT_EXTRA_STORAGE_PLUGINS_DIR = BOT_DATA_DIR + "/storages"
+BOT_EXTRA_STORAGE_PLUGINS_DIR = BOT_ROOT_DIR + "/storages"
 
 STORAGE = 'SQL'
 STORAGE_CONFIG = {
