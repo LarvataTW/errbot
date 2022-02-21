@@ -14,7 +14,7 @@ RUN mkdir -p data plugins backends storages
 RUN cd /app/backends && \
     git clone https://github.com/gbin/err-backend-discord.git
 RUN cd /app/storages && \
-    git clone https://github.com/errbotio/err-storage-sql.git
+    git clone https://github.com/zx1986/err-storage-sql.git
 # update PATH environment variable
 ENV PATH=/root/.local/bin:$PATH
 
