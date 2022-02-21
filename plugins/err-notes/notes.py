@@ -39,7 +39,9 @@ class Notes(BotPlugin):
             self.notes[key] = []
         yield "開始記錄 {} ：".format(key)
 
-    @botcmd
+    @botcmd(template="content")
     def note_read(self, message, args):
         """Read a note"""
-        yield self.notes[args]
+        key = args
+        content = ''.join(self.notes[key])
+        return { 'key': key, 'content': content }
