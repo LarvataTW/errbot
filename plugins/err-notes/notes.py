@@ -22,7 +22,7 @@ class Notes(BotPlugin):
         if not content:
             return
 
-        if content == '#end':
+        if content == '!end':
             yield "完成記錄 {} 。".format(self.creating)
             self.creating = None
 
