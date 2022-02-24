@@ -4,6 +4,14 @@
 - discord
 - python
 
+## Configs (Environment Variables)
+
+- DATABASE_URI (mysql+pymysql://root:12345678@127.0.0.1:3306/errbot?charset=utf8mb4)
+- DISCORD_TOKEN
+- BOT_ADMINS
+- BOT_BACKEND (Discord, Text)
+- BOT_STORAGE (SQL, Shelf)
+
 ## Plugins
 
 ```
