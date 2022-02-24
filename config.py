@@ -45,8 +45,7 @@ BOT_ROOT_DIR = "/app"
 # "Telegram" - cloud-based mobile and desktop messaging app with a focus
 #              on security and speed. (https://telegram.org/)
 
-# BACKEND = "Text"  # defaults to Text
-BACKEND = 'Discord'
+BACKEND = os.getenv('BOT_BACKEND', 'Text')
 
 # STORAGE selection.
 # This configures the type of persistence you wish to use Errbot with.
@@ -63,8 +62,8 @@ BACKEND = 'Discord'
 
 BOT_EXTRA_STORAGE_PLUGINS_DIR = BOT_ROOT_DIR + "/storages"
 
-STORAGE = 'SQL'
-STORAGE_CONFIG = {'data_url': os.environ["DATABASE_URI"]}
+STORAGE = os.getenv('BOT_STORAGE', 'Shelf')
+STORAGE_CONFIG = {'data_url': os.getenv('DATABASE_URI', 'mysql+pymysql://root:12345678@127.0.0.1:3306/errbot?charset=utf8mb4')}
 
 # The location where all of Err's data should be stored. Make sure to set
 # this to a directory that is writable by the user running the bot.
@@ -167,7 +166,7 @@ BOT_IDENTITY = {
     # "password": "changeme",  # The corresponding password for this user
     # "server": ("host.domain.tld", 5222),  # server override
     ## Slack mode (comment the others above if using this mode)
-    "token": os.environ["DISCORD_TOKEN"]
+    "token": os.getenv('DISCORD_TOKEN', 'your_discord_token')
     ## you can also include the proxy for the SlackClient connection
     # "proxies": {"http": "some-http-proxy", "https": "some-https-proxy"}
     ## Telegram mode (comment the others above if using this mode)
@@ -193,7 +192,7 @@ BOT_IDENTITY = {
 #
 # Unix-style glob patterns are supported, so "gbin@localhost"
 # would be considered an admin if setting "*@localhost".
-BOT_ADMINS = (os.environ["ERRBOT_ADMINS"],)
+BOT_ADMINS = (os.getenv('BOT_ADMINS', '@CHANGE_ME'),)
 
 # Set of admins that wish to receive administrative bot notifications.
 # BOT_ADMINS_NOTIFICATIONS = ()
