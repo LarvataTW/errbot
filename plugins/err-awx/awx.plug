@@ -1,0 +1,9 @@
+[Core]
+name = Awx
+module = awx
+
+[Documentation]
+description = Ansible Tower Command Line Helper
+
+[Python]
+version = 3

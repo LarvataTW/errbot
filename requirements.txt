@@ -4,3 +4,4 @@ aslookup
 PyMySQL
 jsonpickle
 sqlalchemy
+awxkit
