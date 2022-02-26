@@ -13,9 +13,9 @@ class Awx(BotPlugin):
         self.env = os.environ.copy()
         super().__init__(*args, **kwargs)
 
-    @botcmd
-    def awx_info(self, message, args):
-        """Get AWX info"""
+    @botcmd(template="json")
+    def awx_ping(self, message, args):
+        """Get AWX base info"""
         process = subprocess.Popen(
                     ['awx', 'ping'],
                     env=self.env,
@@ -24,5 +24,4 @@ class Awx(BotPlugin):
                     universal_newlines=True
                 )
         stdout, stderr = process.communicate()
-        yield stdout
-        yield stderr
+        return { 'stdout': stdout, 'stderr': stderr }

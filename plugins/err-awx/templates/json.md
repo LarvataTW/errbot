@@ -1,0 +1,3 @@
+```js
+{{ stdout | safe }}
+```
