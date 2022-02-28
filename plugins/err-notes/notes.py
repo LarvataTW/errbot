@@ -53,14 +53,14 @@ class Notes(BotPlugin):
             _d['content'] = []
         yield "開始記錄 {} ：".format(key)
 
-    @botcmd(template="content")
+    @botcmd(template="raw")
     def note_get(self, message, args):
         """Read a note"""
         key = args
         content = "\n".join(self[key]['content'])
         return { 'key': key, 'content': content }
 
-    @botcmd(template="content")
+    @botcmd(template="markdown")
     def note_list(self, message, args):
         """List notes keys"""
         content = "\n".join(list(self.keys()))
