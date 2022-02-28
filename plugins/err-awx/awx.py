@@ -39,24 +39,31 @@ class Awx(BotPlugin):
         result = self._run_command(cmd)
         return result
 
-    @botcmd(template="json")
+    @botcmd(template="markdown")
     def awx_job_templates_list(self, message, args):
         """List AWX job templates."""
-        cmd =['awx', 'job_templates', 'list']
+        cmd =['awx', 'job_templates', 'list', '--all']
         result = self._run_command(cmd)
-        return result
+        job_templates = json.loads(result['stdout'])
+        content = []
+        for job_template in job_templates['results']:
+            content.append("---")
+            content.append("任務編號：{}".format(job_template['id']))
+            content.append("任務名稱：{}".format(job_template['name']))
+            content.append("任務腳本：{}".format(job_template['playbook']))
+        return { 'content': content }
 
     @botcmd(template="markdown")
     def awx_projects_list(self, message, args):
         """List AWX projects."""
-        cmd =['awx', 'projects', 'list']
+        cmd =['awx', 'projects', 'list', '--all']
         result = self._run_command(cmd)
         projects = json.loads(result['stdout'])
         content = []
         for project in projects['results']:
+            content.append("---")
             content.append("專案編號：{}".format(project['id']))
             content.append("專案名稱：{}".format(project['name']))
             content.append("專案源碼：{}".format(project['scm_url']))
             content.append("專案版本：{}".format(project['scm_revision']))
-            content.append("---")
         return { 'content': content }
