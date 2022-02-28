@@ -13,11 +13,9 @@ class Awx(BotPlugin):
         self.env = os.environ.copy()
         super().__init__(*args, **kwargs)
 
-    @botcmd(template="json")
-    def awx_ping(self, message, args):
-        """Get AWX base infomation."""
+    def _run_command(self, cmd_list):
         process = subprocess.Popen(
-                    ['awx', 'ping'],
+                    cmd_list,
                     env=self.env,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE,
@@ -25,29 +23,24 @@ class Awx(BotPlugin):
                 )
         stdout, stderr = process.communicate()
         return { 'stdout': stdout, 'stderr': stderr }
+
+    @botcmd(template="json")
+    def awx_ping(self, message, args):
+        """Get AWX base infomation."""
+        cmd = ['awx', 'ping']
+        result = self._run_command(cmd)
+        return result
 
     @botcmd(template="json")
     def awx_job_templates_launch(self, message, args):
         """Launch AWX job by specified job template id."""
-        process = subprocess.Popen(
-                    ['awx', 'job_templates', 'launch', args],
-                    env=self.env,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    universal_newlines=True
-                )
-        stdout, stderr = process.communicate()
-        return { 'stdout': stdout, 'stderr': stderr }
+        cmd = ['awx', 'job_templates', 'launch', args]
+        result = self._run_command(cmd)
+        return result
 
     @botcmd(template="json")
     def awx_job_templates_list(self, message, args):
         """Launch AWX job by specified job template id."""
-        process = subprocess.Popen(
-                    ['awx', 'job_templates', 'list'],
-                    env=self.env,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    universal_newlines=True
-                )
-        stdout, stderr = process.communicate()
-        return { 'stdout': stdout, 'stderr': stderr }
+        cmd =['awx', 'job_templates', 'list']
+        result = self._run_command(cmd)
+        return result
