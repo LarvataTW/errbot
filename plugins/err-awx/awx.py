@@ -53,9 +53,9 @@ class Awx(BotPlugin):
             content.append("任務編號：{}".format(job_template['id']))
             content.append("任務名稱：{}".format(job_template['name']))
             content.append("任務腳本：{}".format(job_template['playbook']))
-        return { 'content': content }
+        return { 'content': "\n".join(content) }
 
-    @botcmd(template="markdown")
+    @botcmd(template="raw")
     def awx_projects_list(self, message, args):
         """List AWX projects."""
         # TODO: 根據 args 進行搜尋過濾
@@ -69,4 +69,4 @@ class Awx(BotPlugin):
             content.append("專案名稱：{}".format(project['name']))
             content.append("專案源碼：{}".format(project['scm_url']))
             content.append("專案版本：{}".format(project['scm_revision']))
-        return { 'content': content }
+        return { 'content': "\n".join(content) }
