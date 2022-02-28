@@ -59,3 +59,9 @@ class Notes(BotPlugin):
         key = args
         content = "\n".join(self[key]['content'])
         return { 'key': key, 'content': content }
+
+    @botcmd(template="content")
+    def note_list(self, message, args):
+        """List notes keys"""
+        content = "\n".join(list(self.keys()))
+        return { 'content': content }
