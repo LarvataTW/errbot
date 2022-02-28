@@ -1,6 +1,7 @@
 from errbot import BotPlugin, botcmd
 
 import os
+import json
 import subprocess
 
 class Awx(BotPlugin):
@@ -40,7 +41,22 @@ class Awx(BotPlugin):
 
     @botcmd(template="json")
     def awx_job_templates_list(self, message, args):
-        """Launch AWX job by specified job template id."""
+        """List AWX job templates."""
         cmd =['awx', 'job_templates', 'list']
         result = self._run_command(cmd)
         return result
+
+    @botcmd(template="markdown")
+    def awx_projects_list(self, message, args):
+        """List AWX projects."""
+        cmd =['awx', 'projects', 'list']
+        result = self._run_command(cmd)
+        projects = json.loads(result['stdout'])
+        content = []
+        for project in projects['results']:
+            content.append("專案編號：{}".format(project['id']))
+            content.append("專案名稱：{}".format(project['name']))
+            content.append("專案源碼：{}".format(project['scm_url']))
+            content.append("專案版本：{}".format(project['scm_revision']))
+            content.append("---")
+        return { 'content': content }
