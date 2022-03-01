@@ -49,7 +49,7 @@ class Awx(BotPlugin):
         job_templates = json.loads(result['stdout'])
         content = []
         for job_template in job_templates['results']:
-            content.append("---")
+            content.append("\n")
             content.append("任務編號：{}".format(job_template['id']))
             content.append("任務名稱：{}".format(job_template['name']))
             content.append("任務腳本：{}".format(job_template['playbook']))
@@ -64,7 +64,7 @@ class Awx(BotPlugin):
         projects = json.loads(result['stdout'])
         content = []
         for project in projects['results']:
-            content.append("---")
+            content.append("\n")
             content.append("專案編號：{}".format(project['id']))
             content.append("專案名稱：{}".format(project['name']))
             content.append("專案源碼：{}".format(project['scm_url']))
