@@ -14,6 +14,7 @@ class Notes(BotPlugin):
     # 所以只好使用 regular 捕捉所有訊息
     @re_botcmd(pattern=r".*", prefixed=False)
     def messages_filter(self, message, match):
+        """捕獲訊息並判斷是否記錄到對應的 Note"""
         content = message.body.strip()
         username = message.frm
         channel = message.frm.room if message.is_group else message.frm
@@ -40,7 +41,7 @@ class Notes(BotPlugin):
 
     @botcmd
     def note_set(self, message, args):
-        """Create a note"""
+        """建立 Note"""
         key = args
         username = message.frm
         channel = message.frm.room if message.is_group else message.frm
@@ -55,13 +56,25 @@ class Notes(BotPlugin):
 
     @botcmd(template="raw")
     def note_get(self, message, args):
-        """Read a note"""
+        """讀取 Note"""
         key = args
         content = "\n".join(self[key]['content'])
         return { 'key': key, 'content': content }
 
+    @botcmd
+    def note_rm(self, message, args):
+        """刪除 Note"""
+        key = args
+        if key in self:
+            content = "\n".join(self[key]['content'])
+            del self[key]
+            yield "刪除：{}".format(key)
+            yield "{}".format(content)
+        else:
+            yield "{} 不存在。".format(key)
+
     @botcmd(template="markdown")
     def note_list(self, message, args):
-        """List notes keys"""
+        """條列 Note"""
         content = "\n".join(list(self.keys()))
         return { 'content': content }
