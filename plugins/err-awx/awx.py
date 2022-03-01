@@ -27,14 +27,14 @@ class Awx(BotPlugin):
 
     @botcmd(template="json")
     def awx_ping(self, message, args):
-        """Get AWX base infomation."""
+        """驗證 AWX 連線與授權"""
         cmd = ['awx', 'ping']
         result = self._run_command(cmd)
         return result
 
     @botcmd(template="json")
     def awx_job_templates_launch(self, message, args):
-        """Launch AWX job by specified job template id."""
+        """發射指定編號的 AWX 任務"""
         # TODO: 建立互動詢問，確認是否執行，而不是無腦直接執行
         cmd = ['awx', 'job_templates', 'launch', args]
         result = self._run_command(cmd)
@@ -42,7 +42,7 @@ class Awx(BotPlugin):
 
     @botcmd(template="raw")
     def awx_job_templates_list(self, message, args):
-        """List AWX job templates."""
+        """條列 AWX 任務樣板"""
         # TODO: 根據 args 進行搜尋過濾
         cmd =['awx', 'job_templates', 'list', '--all']
         result = self._run_command(cmd)
@@ -57,7 +57,7 @@ class Awx(BotPlugin):
 
     @botcmd(template="markdown")
     def awx_projects_list(self, message, args):
-        """List AWX projects."""
+        """條列 AWX 專案"""
         # TODO: 根據 args 進行搜尋過濾
         cmd =['awx', 'projects', 'list', '--all']
         result = self._run_command(cmd)
