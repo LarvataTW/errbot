@@ -40,7 +40,7 @@ class Awx(BotPlugin):
         result = self._run_command(cmd)
         return result
 
-    @botcmd(template="markdown")
+    @botcmd(template="raw")
     def awx_job_templates_list(self, message, args):
         """List AWX job templates."""
         # TODO: 根據 args 進行搜尋過濾
@@ -55,7 +55,7 @@ class Awx(BotPlugin):
             content.append("任務腳本：{}".format(job_template['playbook']))
         return { 'content': "\n".join(content) }
 
-    @botcmd(template="raw")
+    @botcmd(template="markdown")
     def awx_projects_list(self, message, args):
         """List AWX projects."""
         # TODO: 根據 args 進行搜尋過濾
