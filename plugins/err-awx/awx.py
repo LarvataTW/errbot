@@ -63,17 +63,29 @@ class Awx(BotPlugin):
             content.append("任務腳本：{}".format(job_template['playbook']))
         return { 'content': "\n".join(content) }
 
-    @botcmd(template="json")
+    @botcmd(template="raw")
     def awx_job_templates_launch(self, message, args):
-        """發射指定編號的 AWX 任務"""
+        """發射指定編號的 AWX 任務，並回傳 Job 編號"""
         # TODO: 建立互動詢問，確認是否執行，而不是無腦直接執行
         cmd = ['awx', 'job_templates', 'launch', args]
         result = self._run_command(cmd)
-        return result
+        job = json.loads(result['stdout'])
+        content = []
+        content.append("Job 編號：{}".format(job['id']))
+        content.append("Job 連結：{}".format(job['url']))
+        content.append("Job 名稱：{}".format(job['name']))
+        content.append("Job 狀態：{}".format(job['status']))
+        return { 'content': "\n".join(content) }
 
-    @botcmd(template="json")
+    @botcmd(template="raw")
     def awx_job_get(self, message, args):
-        """取得指定編號的 AWX 任務狀態"""
+        """取得指定編號的 AWX Job 狀態"""
         cmd = ['awx', 'job', 'get', args]
         result = self._run_command(cmd)
-        return result
+        job = json.loads(result['stdout'])
+        content = []
+        content.append("Job 編號：{}".format(job['id']))
+        content.append("Job 連結：{}".format(job['url']))
+        content.append("Job 名稱：{}".format(job['name']))
+        content.append("Job 狀態：{}".format(job['status']))
+        return { 'content': "\n".join(content) }
