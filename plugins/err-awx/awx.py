@@ -36,7 +36,13 @@ class Awx(BotPlugin):
     def awx_projects_list(self, message, args):
         """條列 AWX 專案"""
         # TODO: 根據 args 進行搜尋過濾
-        cmd =['awx', 'projects', 'list', '--all']
+        # 當 args 為空則列出全部的 projects 資訊
+        # 否則列出單一 projects 
+        # Example: !awx projects list suzen
+        if args:
+            cmd =['awx', 'projects', 'list', '--name', args]
+        else:
+            cmd =['awx', 'projects', 'list', '--all']
         result = self._run_command(cmd)
         projects = json.loads(result['stdout'])
         content = []
