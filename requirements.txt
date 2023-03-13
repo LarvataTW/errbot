@@ -1,4 +1,4 @@
-errbot
+errbot==6.1.9
 discord.py==1.7.3
 aslookup
 PyMySQL
